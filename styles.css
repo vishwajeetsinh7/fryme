@@ -729,6 +729,8 @@ header.scrolled {
         /* Start off-screen to the right */
         transform: translateX(100%);
         transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        justify-content: start;
+        padding-top: 4rem;
     }
 
     .nav-links.active {
