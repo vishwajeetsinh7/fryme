@@ -790,6 +790,17 @@ header.scrolled {
 }
 
 
+@media (min-width: 749px) { 
+    header:not(.scrolled) .nav-links { 
+    background: rgba(255, 255, 255, 0.566);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    padding: 0.75rem 3rem;
+    border-radius: 12px;
+    }
+}
+
 
 
 /* Base styles for icons in Stat and Contact cards */
