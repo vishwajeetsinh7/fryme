@@ -33,25 +33,31 @@ body {
     padding: 0 20px;
 }
 
+
+/* --- Updated Header/Navbar --- */
 header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow);
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease-in-out;
+    /* Starts transparent */
+    background: transparent;
+    padding: 1rem 0;
 }
 
 header.scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: var(--shadow-lg);
+    /* "Glassmorphism" effect on scroll */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    box-shadow: var(--shadow);
+    padding: 0.75rem 0;
 }
 
 .navbar {
-    padding: 1rem 0;
+    /* Padding is now controlled by the header */
 }
 
 .navbar .container {
@@ -68,53 +74,106 @@ header.scrolled {
 
 .logo {
     width: 85px;
-    /* height: 50px; */
     height: auto;
-    /* border-radius: 50%; */
     object-fit: cover;
 }
 
-.brand-name {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
+/* --- Desktop Navigation Links --- */
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 2.5rem; /* Increased gap slightly */
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--text-dark);
-    font-weight: 500;
+    font-weight: 600; /* Slightly bolder */
+    font-size: 1.05rem;
     transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+/* Animated underline effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    transition: width 0.4s ease;
 }
 
 .nav-links a:hover {
     color: var(--primary-color);
 }
 
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* --- Mobile Navigation and Overlay --- */
 .mobile-toggle {
-    display: none;
+    display: none; /* Hidden by default, shown in media query */
     flex-direction: column;
-    gap: 4px;
+    gap: 5px; /* Slightly increased gap for better animation */
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 1001; /* Must be above the header */
+    padding: 5px;
 }
 
 .mobile-toggle span {
-    width: 25px;
+    width: 28px;
     height: 3px;
     background: var(--text-dark);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
 }
 
+/* Hamburger to "X" animation */
+.mobile-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.mobile-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* The dark overlay behind the mobile menu */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 998; /* Below menu, above content */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+
 .hero {
-    margin-top: 82px;
+    margin-top: 0; /* Updated: The header is transparent, so no margin is needed */
+    padding-top: 82px; /* Add padding to prevent content from hiding behind the fixed header */
     min-height: 700px;
     background: linear-gradient(135deg, #fff5f5 0%, #ffe0b2 50%, #ffcc80 100%);
     display: flex;
@@ -124,7 +183,7 @@ header.scrolled {
     position: relative;
     overflow: hidden;
     background-image: url('./public/hero-img-2.png');
- background-position: center;
+    background-position: center;
     background-size: cover;
 }
 
@@ -160,12 +219,12 @@ header.scrolled {
     text-align: center;
     z-index: 2;
     animation: fadeInUp 1s ease-out;
-     background: rgba(255, 255, 255, 0.4); /* semi-transparent white */
-    backdrop-filter: blur(12px);           /* applies blur to background */
-    border-radius: 24px;                   /* rounded corners */
-    padding: 2rem;                         /* space inside container */
-    color: #fff;                           /* white text color */
-    box-shadow: 0 4px 24px rgba(0,0,0,0.07); /* subtle shadow for depth */
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 2rem;
+    color: #fff;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
 }
 
 @keyframes fadeInUp {
@@ -269,49 +328,17 @@ header.scrolled {
     animation: floatSnack 15s ease-in-out infinite;
 }
 
-.snack-1 {
-    top: 10%;
-    left: 10%;
-    animation-delay: 0s;
-}
+.snack-1 { top: 10%; left: 10%; animation-delay: 0s; }
+.snack-2 { top: 60%; right: 15%; animation-delay: 3s; width: 80px; height: 80px; }
+.snack-3 { bottom: 20%; left: 20%; animation-delay: 6s; width: 50px; height: 50px; }
+.snack-4 { top: 30%; right: 25%; animation-delay: 9s; width: 70px; height: 70px; }
 
-.snack-2 {
-    top: 60%;
-    right: 15%;
-    animation-delay: 3s;
-    width: 80px;
-    height: 80px;
-}
-
-.snack-3 {
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 6s;
-    width: 50px;
-    height: 50px;
-}
-
-.snack-4 {
-    top: 30%;
-    right: 25%;
-    animation-delay: 9s;
-    width: 70px;
-    height: 70px;
-}
 
 @keyframes floatSnack {
-    0%, 100% {
-        transform: translateY(0) rotate(0deg);
-    }
-    25% {
-        transform: translateY(-30px) rotate(90deg);
-    }
-    50% {
-        transform: translateY(-50px) rotate(180deg);
-    }
-    75% {
-        transform: translateY(-30px) rotate(270deg);
-    }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(90deg); }
+    50% { transform: translateY(-50px) rotate(180deg); }
+    75% { transform: translateY(-30px) rotate(270deg); }
 }
 
 .curve-divider {
@@ -382,7 +409,7 @@ header.scrolled {
 }
 
 .stat-number {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
@@ -492,13 +519,8 @@ header.scrolled {
     transform: translateY(-50%) scale(1.1);
 }
 
-.carousel-btn.prev {
-    left: 0;
-}
-
-.carousel-btn.next {
-    right: 0;
-}
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
 
 .carousel-dots {
     display: flex;
@@ -542,21 +564,9 @@ header.scrolled {
     box-shadow: var(--shadow-lg);
 }
 
-.about-content {
-    padding: 2rem;
-}
-
-.about-content .section-title {
-    text-align: left;
-    margin-bottom: 2rem;
-}
-
-.about-content p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--text-dark);
-}
+.about-content { padding: 2rem; }
+.about-content .section-title { text-align: left; margin-bottom: 2rem; }
+.about-content p { margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); }
 
 .certification-badge {
     display: inline-flex;
@@ -581,10 +591,7 @@ header.scrolled {
     font-weight: bold;
 }
 
-.badge-text {
-    font-weight: 600;
-    color: #2e7d32;
-}
+.badge-text { font-weight: 600; color: #2e7d32; }
 
 .contact-section {
     padding: 5rem 0;
@@ -626,24 +633,10 @@ header.scrolled {
     transition: transform 0.3s ease;
 }
 
-.contact-card:hover {
-    transform: translateY(-5px);
-}
-
-.contact-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.contact-card h3 {
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
-}
-
-.contact-card p {
-    color: var(--text-light);
-    line-height: 1.6;
-}
+.contact-card:hover { transform: translateY(-5px); }
+.contact-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.contact-card h3 { margin-bottom: 0.5rem; color: var(--text-dark); }
+.contact-card p { color: var(--text-light); line-height: 1.6; }
 
 .contact-form-wrapper {
     background: var(--white);
@@ -652,19 +645,9 @@ header.scrolled {
     box-shadow: var(--shadow);
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.form-group input,
-.form-group textarea {
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark); }
+.form-group input, .form-group textarea {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid #e0e0e0;
@@ -674,8 +657,7 @@ header.scrolled {
     transition: border-color 0.3s ease;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-group input:focus, .form-group textarea:focus {
     outline: none;
     border-color: var(--primary-color);
 }
@@ -712,129 +694,128 @@ header.scrolled {
     gap: 2rem;
 }
 
-.footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.footer-brand { display: flex; align-items: center; gap: 12px; }
+.footer-logo { width: 90px; height: auto; object-fit: cover; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--secondary-color); }
+.footer-copyright { color: rgba(255, 255, 255, 0.7); text-align: center; }
+.footer-copyright p { margin: 0.25rem 0; }
+.footer-tagline { font-style: italic; color: var(--secondary-color); font-weight: 600; margin-top: 0.5rem; }
 
-.footer-logo {
-    width: 90px;
-    height: auto;
-    /* height: 40px; */
-    /* border-radius: 50%; */
-    object-fit: cover;
-}
 
-.footer-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-links a {
-    color: var(--white);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--secondary-color);
-}
-
-.footer-copyright {
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-}
-
-.footer-copyright p {
-    margin: 0.25rem 0;
-}
-
-.footer-tagline {
-    font-style: italic;
-    color: var(--secondary-color);
-    font-weight: 600;
-    margin-top: 0.5rem;
-}
-
+/* --- Updated Media Query for Responsiveness --- */
 @media (max-width: 768px) {
     .mobile-toggle {
         display: flex;
     }
 
+    /* This is now the off-canvas menu */
     .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
+        position: fixed;
+        top: 0;
         right: 0;
+        width: 75%; /* Occupies 75% of screen width */
+        max-width: 320px;
+        height: 100vh;
         background: var(--white);
         flex-direction: column;
+        justify-content: center; /* Center links vertically */
+        align-items: center;
+        gap: 2.5rem;
         padding: 2rem;
-        box-shadow: var(--shadow);
-        transform: translateY(-100%);
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease;
+        box-shadow: var(--shadow-xl);
+        z-index: 999;
+        /* Start off-screen to the right */
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
 
     .nav-links.active {
-        transform: translateY(0);
-        opacity: 1;
-        pointer-events: all;
+        /* Slide into view */
+        transform: translateX(0);
+    }
+
+    /* Style links inside the mobile menu */
+    .nav-links li {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: menu-item-fade-in 0.5s forwards;
+    }
+
+    /* Staggered animation for links appearing */
+    .nav-links.active li:nth-child(1) { animation-delay: 0.2s; }
+    .nav-links.active li:nth-child(2) { animation-delay: 0.3s; }
+    .nav-links.active li:nth-child(3) { animation-delay: 0.4s; }
+    .nav-links.active li:nth-child(4) { animation-delay: 0.5s; }
+
+    @keyframes menu-item-fade-in {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-links a {
+        font-size: 1.5rem; /* Make links much larger */
+    }
+
+    .nav-links a::after {
+        display: none; /* Remove underline effect on mobile */
     }
 
     .hero {
         min-height: 600px;
-        padding: 2rem 20px;
+        padding: 82px 20px 2rem;
     }
 
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .cta-button {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-    }
-
-    .product-card {
-        min-width: 100%;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-info {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 1rem;
-    }
+    .hero-title { font-size: 2rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .cta-button { padding: 1rem 2rem; font-size: 1rem; }
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .product-card { min-width: 100%; }
+    .about-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-info { grid-template-columns: 1fr; }
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-links { flex-direction: column; gap: 1rem; }
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
     .product-card {
         min-width: calc(50% - 20px);
     }
+}
+
+
+
+
+/* Base styles for icons in Stat and Contact cards */
+.stat-icon svg,
+.contact-icon svg {
+    width: 48px;  /* Set a fixed width */
+    height: 48px; /* Set a fixed height */
+    fill: var(--primary-color); /* Use your primary red color */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Add a subtle hover effect to the stat card icons */
+.stat-card:hover .stat-icon svg {
+    fill: var(--accent-color); /* Change to accent orange on hover */
+    transform: scale(1.1) rotate(5deg); /* Make it slightly larger and tilted */
+}
+
+
+/* --- SVG Icon Styling for Carousel Buttons --- */
+
+.carousel-btn svg {
+    width: 24px;  /* Smaller size suitable for a button */
+    height: 24px;
+    fill: var(--white); /* White color to stand out on the red background */
+    transition: fill 0.3s ease;
+}
+
+/* Make the carousel button icons slightly transparent on hover */
+.carousel-btn:hover svg {
+    fill: rgba(255, 255, 255, 0.85);
 }
