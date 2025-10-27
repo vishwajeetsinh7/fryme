@@ -83,6 +83,7 @@ header.scrolled {
     display: flex;
     list-style: none;
     gap: 2.5rem; /* Increased gap slightly */
+    align-items: center;
 }
 
 .nav-links a {
@@ -487,7 +488,8 @@ header.scrolled {
 }
 
 .product-card h3 {
-    padding: 1.5rem 1rem 0.5rem;
+    text-align: center;
+    padding: 1rem .5rem;
     font-size: 1.3rem;
     color: var(--text-dark);
 }
@@ -696,7 +698,7 @@ header.scrolled {
 
 .footer-brand { display: flex; align-items: center; gap: 12px; }
 .footer-logo { width: 90px; height: auto; object-fit: cover; }
-.footer-links { display: flex; gap: 2rem; }
+.footer-links { display: flex; gap: 2rem; align-items: center; }
 .footer-links a { color: var(--white); text-decoration: none; transition: color 0.3s ease; }
 .footer-links a:hover { color: var(--secondary-color); }
 .footer-copyright { color: rgba(255, 255, 255, 0.7); text-align: center; }
