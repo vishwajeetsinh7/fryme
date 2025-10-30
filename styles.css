@@ -183,7 +183,7 @@ header.scrolled {
     padding: 4rem 20px;
     position: relative;
     overflow: hidden;
-    background-image: url('./public/hero-img-2.png');
+    background-image: url('./images/hero-img-2.png');
     background-position: center;
     background-size: cover;
 }
