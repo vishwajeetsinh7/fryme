@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const dotsContainer = document.getElementById('carouselDots');
-    const contactForm = document.getElementById('contactForm');
+
 
     // --- Header Scroll Effect ---
     window.addEventListener('scroll', function() {
@@ -157,14 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     createDots();
 
-    // --- Contact Form Submission ---
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        alert(`Thank you, ${name}! Your inquiry has been received. We'll get back to you at ${email} soon.`);
-        contactForm.reset();
-    });
 
     // --- Fade-in Animations for Sections ---
     const observerOptions = {
@@ -207,18 +199,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // prevent default form submission
-
-    const phoneNumber = '+919681850870'; // your WhatsApp number with country code (India example)
-    const name = encodeURIComponent(document.getElementById('name').value.trim());
-    const email = encodeURIComponent(document.getElementById('email').value.trim());
-    const message = encodeURIComponent(document.getElementById('message').value.trim());
-
-    const whatsappMessage = `*New Inquiry from Website*%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-
-    // Open WhatsApp chat in new tab or redirect
-    window.open(whatsappURL, '_blank');
-});
