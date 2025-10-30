@@ -408,6 +408,9 @@
                 value="9bf18028-133b-48fd-814c-e3466f2fe795"
               />
 
+            <input type="hidden" name="redirect" value="https://www.fryme.in/?form=true">
+
+
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required />
@@ -500,6 +503,20 @@
         </div>
       </div>
     </footer>
+
+
+<dialog id="popup-modal" class="popup-modal">
+  <!-- 
+    The <span> has been changed to a <button> for better 
+    accessibility and standard dialog functionality.
+  -->
+  <button id="popup-close-btn" onclick="closePopup()"  class="popup-close-btn" type="button" aria-label="Close">
+    &times;
+  </button>
+  
+  <h2>Success!</h2>
+  <p>Your form was submitted successfully.</p>
+</dialog>
 
     <script src="script.js"></script>
   </body>

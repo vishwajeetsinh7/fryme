@@ -834,3 +834,92 @@ header.scrolled {
 .carousel-btn:hover svg {
     fill: rgba(255, 255, 255, 0.85);
 }
+
+
+
+/* popup */
+
+.popup-overlay {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+/* The popup modal (white box)
+  Hidden by default
+*/
+/* The dialog element itself (the white box) */
+.popup-modal {
+    /* DO NOT use 'display: none'. The browser handles this. */
+    border: none; /* Removes the default dialog border */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    min-width: 300px;
+    text-align: center;
+}
+
+#popup-modal {
+    /* Make it stay in place when scrolling */
+    position: fixed; 
+    
+    /* Start the top edge at the 50% mark of the viewport */
+    top: 50%; 
+    
+    /* Start the left edge at the 50% mark of the viewport */
+    left: 50%; 
+    
+    /* Move the element back up by 50% of its *own* height
+      and back left by 50% of its *own* width.
+      This is the key to perfect centering.
+    */
+    transform: translate(-50%, -50%); 
+    
+    /* --- Other styles --- */
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1001; /* Make sure it's above the overlay */
+}
+
+/* This styles the dark background overlay */
+.popup-modal::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+/* Style for the new close button */
+.popup-close-btn {
+    /* Reset button styles */
+    background: none;
+    border: none;
+    padding: 0;
+    
+    /* Positioning */
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.popup-close-btn:hover {
+    color: #000;
+}
+
+/* Your other styles */
+.popup-modal h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.popup-modal p {
+    color: #555;
+}

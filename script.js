@@ -199,3 +199,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// popup
+
+
+// Wait for the DOM to be fully loaded before running the script
+// Wait for the HTML document to finish loading
+document.addEventListener('DOMContentLoaded', () => {
+
+    console.log('true')
+    // 1. Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const formParam  = urlParams.get('form')
+
+    if(formParam === 'true' ) { 
+        document.getElementById('popup-modal').showModal();
+    }
+});
+
+function closePopup() { 
+    const popup = document.getElementById('popup-modal');
+    popup.close();
+}
